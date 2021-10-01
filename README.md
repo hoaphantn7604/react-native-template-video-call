@@ -14,3 +14,4 @@ Step 5: npm run android or npm run ios
 ### Demo
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/videocall/demo.png)
 ![](https://github.com/hoaphantn7604/file-upload/blob/master/document/videocall/demo1.png)
+![](https://github.com/hoaphantn7604/file-upload/blob/master/document/videocall/demo2.png)
