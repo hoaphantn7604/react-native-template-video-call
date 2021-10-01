@@ -1,7 +1,7 @@
 {
   "name": "react-native-template-video-call",
   "title": "React Native Video Call",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React Native Video Call",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,7 +16,9 @@
     "elements",
     "components",
     "template",
-    "uikit"
+    "uikit",
+    "webrtc",
+    "video-call"
   ],
   "author": {
     "name": "Hoa Phan",

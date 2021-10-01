@@ -98,7 +98,7 @@ const HomeScreen: React.FC<Props> = props => {
           30/09
         </Text>
         <Feather
-          name="phone-call"
+          name="video"
           size={scale(26)}
           onPress={() => onOpenCall(item.name)}
         />
