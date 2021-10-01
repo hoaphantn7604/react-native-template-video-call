@@ -1,0 +1,28 @@
+{
+  "name": "react-native-template-video-call",
+  "title": "React Native Video Call",
+  "version": "0.0.1",
+  "description": "React Native Video Call",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoaphantn7604/react-native-template-video-call.git",
+    "baseUrl": "https://github.com/hoaphantn7604/react-native-template-video-call"
+  },
+  "keywords": [
+    "react-native",
+    "elements",
+    "components",
+    "template",
+    "uikit"
+  ],
+  "author": {
+    "name": "Hoa Phan",
+    "email": "hoaphantn7604@gmail.com"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md"
+}
