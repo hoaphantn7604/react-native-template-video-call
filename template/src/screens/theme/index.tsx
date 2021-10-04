@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { globalLoading, globalMessage, Modal, Text } from 'components';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ImageBackground,
   SafeAreaView,

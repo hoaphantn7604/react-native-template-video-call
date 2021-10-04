@@ -7,13 +7,14 @@ import React from 'react';
 import MainScreen from 'screens/bottombar';
 import LoginScreen from 'screens/login';
 
-import DropdownScreen from 'screens/theme/dropdown';
-import CheckboxTreeScreen from 'screens/theme/checkboxTree';
-import TimerScreen from 'screens/theme/timer';
-import CountdownScreen from 'screens/theme/countdown';
-import SwipeViewScreen from 'screens/theme/swipeView';
-import MultiSelectScreen from 'screens/theme/multiselect';
-import TextInputScreen from 'screens/theme/textInput';
+import DropdownScreen from 'screens/theme/components/dropdown';
+import CheckboxTreeScreen from 'screens/theme/components/checkboxTree';
+import TimerScreen from 'screens/theme/components/timer';
+import CountdownScreen from 'screens/theme/components/countdown';
+import SwipeViewScreen from 'screens/theme/components/swipeView';
+import MultiSelectScreen from 'screens/theme/components/multiselect';
+import TextInputScreen from 'screens/theme/components/textInput';
+import ThemeScreen from 'screens/theme';
 
 export const navigationRef: React.RefObject<NavigationContainerRef<any>> =
   React.createRef();
@@ -33,6 +34,7 @@ function AppNavigator() {
           component={LoginScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen name="Theme" component={ThemeScreen} />
         <Stack.Screen name="Dropdown" component={DropdownScreen} />
         <Stack.Screen name="MultiSelect" component={MultiSelectScreen} />
         <Stack.Screen name="CheckboxTree" component={CheckboxTreeScreen} />

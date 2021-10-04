@@ -1,18 +1,13 @@
-import { useRoute } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/core';
 import { COLORS } from 'config';
 import React from 'react';
-import {
-  Alert,
-  Animated,
-  StatusBar,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Animated, StatusBar, TouchableOpacity, View } from 'react-native';
 import { CurvedBottomBar } from 'react-native-curved-bottom-bar';
 import { scale } from 'react-native-utils-scale';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import GroupScreen from 'screens/group';
 import HomeScreen from 'screens/home';
-import SettingScreen from 'screens/setting';
+import SettingScreen from 'screens/theme';
 import { styles } from './styles';
 
 export interface Props {}
@@ -23,6 +18,7 @@ const defaultProps = {
 
 StatusBar.setBarStyle('dark-content');
 const MainScreen: React.FC<Props> = _props => {
+  const { navigate } = useNavigation();
   const fullName = (useRoute().params as any)?.fullName;
 
   const _renderIcon = (routeName: string, selectTab: string) => {
@@ -30,15 +26,15 @@ const MainScreen: React.FC<Props> = _props => {
 
     switch (routeName) {
       case 'title1':
-        icon = 'ios-home-outline';
+        icon = 'user-circle-o';
         break;
       case 'title2':
-        icon = 'settings-outline';
+        icon = 'group';
         break;
     }
 
     return (
-      <Ionicons
+      <FontAwesome
         name={icon}
         size={scale(25)}
         color={routeName === selectTab ? COLORS.PRIMARY : 'gray'}
@@ -56,6 +52,7 @@ const MainScreen: React.FC<Props> = _props => {
         bgColor="white"
         initialRouteName="title1"
         swipeEnabled
+        lazy
         renderCircle={() => (
           <Animated.View style={styles.btnCircle}>
             <TouchableOpacity
@@ -63,8 +60,8 @@ const MainScreen: React.FC<Props> = _props => {
                 flex: 1,
                 justifyContent: 'center',
               }}
-              onPress={() => Alert.alert('Click action!')}>
-              <Ionicons name={'apps'} size={scale(25)} />
+              onPress={() => navigate('Theme')}>
+              <FontAwesome name={'th-large'} color="gray" size={scale(25)} />
             </TouchableOpacity>
           </Animated.View>
         )}
@@ -88,8 +85,8 @@ const MainScreen: React.FC<Props> = _props => {
         />
         <CurvedBottomBar.Screen
           name="title2"
-          component={({ navigate }) => <SettingScreen fullName={fullName} />}
           position="right"
+          component={({ navigate }) => <GroupScreen fullName={fullName} />}
         />
       </CurvedBottomBar.Navigator>
     </View>
