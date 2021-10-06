@@ -52,7 +52,6 @@ const MainScreen: React.FC<Props> = _props => {
         bgColor="white"
         initialRouteName="title1"
         swipeEnabled
-        lazy
         renderCircle={() => (
           <Animated.View style={styles.btnCircle}>
             <TouchableOpacity

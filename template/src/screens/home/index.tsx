@@ -1,11 +1,4 @@
-import {
-  Button,
-  FlatList,
-  globalLoading,
-  Header,
-  Modal,
-  Text,
-} from 'components';
+import { Button, FlatList, Header, Modal, Text } from 'components';
 import React, { useEffect, useState } from 'react';
 import { Alert, SafeAreaView, View } from 'react-native';
 import { Image } from 'react-native-element-image';
@@ -44,22 +37,26 @@ const HomeScreen: React.FC<Props> = props => {
   }, []);
 
   const startConnection = () => {
-    globalLoading.show();
     const configuration: any = {
       optional: null,
       key: Math.random().toString(36).substr(2, 4),
     };
 
-    globalCall.start(configuration, sessionId => {
-      globalLoading.hide();
-      setSessionId(sessionId);
-    });
+    WebrtcSimple.start(configuration)
+      .then(status => {
+        if (status) {
+          WebrtcSimple.getSessionId((sessionId: string) => {
+            setSessionId(sessionId);
+          });
+        }
+      })
+      .catch();
   };
 
-  const callToUser = (callId: string, name: string) => {
+  const callToUser = (callId: string) => {
     if (callId.length > 0) {
       if (callId !== sessionId) {
-        const data = {
+        const useData = {
           sender_name: fullName,
           sender_avatar:
             'https://www.atlantawatershed.org/wp-content/uploads/2017/06/default-placeholder.png',
@@ -67,7 +64,7 @@ const HomeScreen: React.FC<Props> = props => {
           receiver_avatar:
             'https://www.atlantawatershed.org/wp-content/uploads/2017/06/default-placeholder.png',
         };
-        WebrtcSimple.events.call(callId, data);
+        globalCall.call(callId, useData);
         setVisible(false);
       } else {
         Alert.alert("You can't call yourself");
@@ -143,7 +140,7 @@ const HomeScreen: React.FC<Props> = props => {
             title="Call"
             textColor="white"
             onPress={() => {
-              callToUser(callId, receverName);
+              callToUser(callId);
             }}
           />
         </View>

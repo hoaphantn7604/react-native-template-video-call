@@ -36,7 +36,7 @@
     "react-native-vector-icons": "^8.1.0",
     "react-native-vertical-swipe-view": "^1.0.3",
     "react-native-webrtc": "^1.92.2",
-    "react-native-webrtc-simple": "^1.1.4"
+    "react-native-webrtc-simple": "^1.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
