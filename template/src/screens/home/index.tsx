@@ -7,11 +7,7 @@ import { fontScale, scale } from 'react-native-utils-scale';
 import { useAppState } from 'react-native-utils-toolkit';
 import Feather from 'react-native-vector-icons/Feather';
 import WebrtcSimple from 'react-native-webrtc-simple';
-import {
-  globalCall,
-  globalCallRef,
-  GlobalCallUI,
-} from 'react-native-webrtc-simple/UIKit';
+import { globalCall } from 'react-native-webrtc-simple/UIKit';
 import { DATA } from './constant';
 import { styles } from './styles';
 
@@ -42,7 +38,7 @@ const HomeScreen: React.FC<Props> = props => {
       key: Math.random().toString(36).substr(2, 4),
     };
 
-    WebrtcSimple.start(configuration)
+    WebrtcSimple.start(configuration, { frameRate: 120 })
       .then(status => {
         if (status) {
           WebrtcSimple.getSessionId((sessionId: string) => {
@@ -111,7 +107,6 @@ const HomeScreen: React.FC<Props> = props => {
         onChangeText={e => {}}
       />
       <FlatList data={DATA} renderItem={_renderItem} />
-      <GlobalCallUI ref={globalCallRef} />
       <Modal
         visible={visible}
         transparent

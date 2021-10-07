@@ -4,11 +4,7 @@ import { SafeAreaView, View } from 'react-native';
 import { TextInput } from 'react-native-element-textinput';
 import { useAppState } from 'react-native-utils-toolkit';
 import WebrtcSimple from 'react-native-webrtc-simple';
-import {
-  globalGroupCall,
-  globalGroupCallRef,
-  GlobalGroupCallUI,
-} from 'react-native-webrtc-simple/UIKit';
+import { globalGroupCall } from 'react-native-webrtc-simple/UIKit';
 import { styles } from './styles';
 
 interface Props {}
@@ -66,7 +62,6 @@ const GroupScreen: React.FC<Props> = props => {
           </View>
         </View>
       </View>
-      <GlobalGroupCallUI ref={globalGroupCallRef} />
     </SafeAreaView>
   );
 };
