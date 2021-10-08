@@ -7,20 +7,17 @@ import WebrtcSimple from 'react-native-webrtc-simple';
 import { globalGroupCall } from 'react-native-webrtc-simple/UIKit';
 import { styles } from './styles';
 
-interface Props {}
+interface Props {
+  fullName: string;
+  sessionId: string;
+}
 
 const GroupScreen: React.FC<Props> = props => {
-  const [mySessionId, setMySessionId] = useState<string>('');
+  const { fullName, sessionId: myId } = props;
   const [sessionId, setSessionId] = useState<string[]>([]);
 
   useAppState(() => {
-    WebrtcSimple.refresh(() => {});
-  }, []);
-
-  useEffect(() => {
-    WebrtcSimple.getSessionId(id => {
-      setMySessionId(id);
-    });
+    WebrtcSimple.refresh();
   }, []);
 
   const startGroup = (sessionId: string[]) => {
@@ -35,7 +32,7 @@ const GroupScreen: React.FC<Props> = props => {
   return (
     <SafeAreaView style={styles.container}>
       <Header
-        name={`Session Id: ${mySessionId}`}
+        name={`${fullName}: ${myId}`}
         onPressUser={() => {}}
         onChangeText={e => {}}
       />

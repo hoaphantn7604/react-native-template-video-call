@@ -1,13 +1,13 @@
 import { useNavigation, useRoute } from '@react-navigation/core';
 import { COLORS } from 'config';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Animated, StatusBar, TouchableOpacity, View } from 'react-native';
 import { CurvedBottomBar } from 'react-native-curved-bottom-bar';
 import { scale } from 'react-native-utils-scale';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import GroupScreen from 'screens/group';
 import HomeScreen from 'screens/home';
-import SettingScreen from 'screens/theme';
+import WebrtcSimple from 'react-native-webrtc-simple';
 import { styles } from './styles';
 
 export interface Props {}
@@ -20,6 +20,28 @@ StatusBar.setBarStyle('dark-content');
 const MainScreen: React.FC<Props> = _props => {
   const { navigate } = useNavigation();
   const fullName = (useRoute().params as any)?.fullName;
+  const [sessionId, setSessionId] = useState<string>('');
+
+  useEffect(() => {
+    startConnection();
+  }, []);
+
+  const startConnection = () => {
+    const configuration: any = {
+      optional: null,
+      key: Math.random().toString(36).substr(2, 4),
+    };
+
+    WebrtcSimple.start(configuration, { frameRate: 120 })
+      .then(status => {
+        if (status) {
+          WebrtcSimple.getSessionId((sessionId: string) => {
+            setSessionId(sessionId);
+          });
+        }
+      })
+      .catch();
+  };
 
   const _renderIcon = (routeName: string, selectTab: string) => {
     let icon = '';
@@ -80,12 +102,16 @@ const MainScreen: React.FC<Props> = _props => {
         <CurvedBottomBar.Screen
           name="title1"
           position="left"
-          component={({ navigate }) => <HomeScreen fullName={fullName} />}
+          component={({ navigate }) => (
+            <HomeScreen fullName={fullName} sessionId={sessionId} />
+          )}
         />
         <CurvedBottomBar.Screen
           name="title2"
           position="right"
-          component={({ navigate }) => <GroupScreen fullName={fullName} />}
+          component={({ navigate }) => (
+            <GroupScreen fullName={fullName} sessionId={sessionId} />
+          )}
         />
       </CurvedBottomBar.Navigator>
     </View>

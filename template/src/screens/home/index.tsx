@@ -13,41 +13,20 @@ import { styles } from './styles';
 
 interface Props {
   fullName: string;
+  sessionId: string;
 }
 
 const HomeScreen: React.FC<Props> = props => {
-  const { fullName } = props;
+  const { fullName, sessionId } = props;
   const [visible, setVisible] = useState<boolean>(false);
-  const [sessionId, setSessionId] = useState<string>('');
   const [callId, setCallId] = useState<string>('');
   const [receverName, setReceverName] = useState<string>('');
 
   useAppState(state => {
     if (state === 'active') {
-      WebrtcSimple.refresh(() => {});
+      WebrtcSimple.refresh();
     }
   }, []);
-
-  useEffect(() => {
-    startConnection();
-  }, []);
-
-  const startConnection = () => {
-    const configuration: any = {
-      optional: null,
-      key: Math.random().toString(36).substr(2, 4),
-    };
-
-    WebrtcSimple.start(configuration, { frameRate: 120 })
-      .then(status => {
-        if (status) {
-          WebrtcSimple.getSessionId((sessionId: string) => {
-            setSessionId(sessionId);
-          });
-        }
-      })
-      .catch();
-  };
 
   const callToUser = (callId: string) => {
     if (callId.length > 0) {
@@ -102,7 +81,7 @@ const HomeScreen: React.FC<Props> = props => {
   return (
     <SafeAreaView style={styles.container}>
       <Header
-        name={`Session Id: ${sessionId}`}
+        name={`${fullName}: ${sessionId}`}
         onPressUser={() => {}}
         onChangeText={e => {}}
       />
