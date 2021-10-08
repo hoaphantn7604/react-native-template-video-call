@@ -8,6 +8,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import GroupScreen from 'screens/group';
 import HomeScreen from 'screens/home';
 import WebrtcSimple from 'react-native-webrtc-simple';
+import { useAppState } from 'react-native-utils-toolkit';
 import { styles } from './styles';
 
 export interface Props {}
@@ -25,6 +26,13 @@ const MainScreen: React.FC<Props> = _props => {
   useEffect(() => {
     startConnection();
   }, []);
+
+  useAppState(state => {
+    if (state === 'active') {
+      WebrtcSimple.refresh();
+    }
+  }, []);
+
 
   const startConnection = () => {
     const configuration: any = {

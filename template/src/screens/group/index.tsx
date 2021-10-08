@@ -16,10 +16,6 @@ const GroupScreen: React.FC<Props> = props => {
   const { fullName, sessionId: myId } = props;
   const [sessionId, setSessionId] = useState<string[]>([]);
 
-  useAppState(() => {
-    WebrtcSimple.refresh();
-  }, []);
-
   const startGroup = (sessionId: string[]) => {
     const data = {
       name: 'Group name',

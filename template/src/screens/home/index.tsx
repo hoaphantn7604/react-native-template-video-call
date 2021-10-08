@@ -22,12 +22,6 @@ const HomeScreen: React.FC<Props> = props => {
   const [callId, setCallId] = useState<string>('');
   const [receverName, setReceverName] = useState<string>('');
 
-  useAppState(state => {
-    if (state === 'active') {
-      WebrtcSimple.refresh();
-    }
-  }, []);
-
   const callToUser = (callId: string) => {
     if (callId.length > 0) {
       if (callId !== sessionId) {
