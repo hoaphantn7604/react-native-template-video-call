@@ -1,25 +1,23 @@
 import { useNavigation } from '@react-navigation/native';
 import { globalLoading, globalMessage, Modal, Text } from 'components';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
+  Alert,
   ImageBackground,
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Image } from 'react-native-element-image';
+import { Avatar, Image } from 'react-native-element-image';
 import { scale } from 'react-native-utils-scale';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { defaulft_avt, defaulft_img } from './constant';
 import { styles } from './styles';
 
-interface Props {
-  fullName: string;
-}
+interface Props {}
 
 const SettingScreen: React.FC<Props> = props => {
-  const { fullName } = props;
   const [visible, setVisible] = useState<boolean>(false);
   const { navigate } = useNavigation();
 
@@ -40,17 +38,15 @@ const SettingScreen: React.FC<Props> = props => {
         style={styles.imgBackground}
         imageStyle={styles.imgBackground}
         source={defaulft_img}>
-        <View style={styles.wrap}>
-          <Image
-            style={styles.avatarImg}
-            width={scale(100)}
-            height={scale(100)}
-            source={defaulft_avt}
-          />
-        </View>
-        <Text style={styles.name} bold fontSize={26}>
-          {fullName}
-        </Text>
+        <Avatar
+          source={defaulft_avt}
+          size={120}
+          containerStyle={styles.wrap}
+          iconEnable
+          onPressIcon={() => Alert.alert('Click')}
+          nameStyle={{ fontSize: scale(20) }}
+          name="HP Theme"
+        />
       </ImageBackground>
       <ScrollView>
         <View style={styles.wrapMenu}>
@@ -65,6 +61,12 @@ const SettingScreen: React.FC<Props> = props => {
           })}
           {itemMenu('iconfontdesktop', 'TextInput', () => {
             navigate('TextInput');
+          })}
+          {itemMenu('iconfontdesktop', 'Avatar', () => {
+            navigate('Avatar');
+          })}
+          {itemMenu('iconfontdesktop', 'Checkbox', () => {
+            navigate('Checkbox');
           })}
           {itemMenu('iconfontdesktop', 'Swipe View', () => {
             navigate('SwipeView');

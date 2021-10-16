@@ -28,7 +28,8 @@ export const styles = StyleSheet.create({
   modal: { padding: scale(16) },
   textinput: {
     borderBottomWidth: scale(0.5),
-    height: scale(50),
+    height: scale(60),
     borderBottomColor: 'gray',
+    marginVertical: scale(22),
   },
 });

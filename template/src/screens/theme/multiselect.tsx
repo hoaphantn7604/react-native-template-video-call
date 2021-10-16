@@ -16,22 +16,12 @@ const data = [
   { label: 'Item 8', value: '8' },
 ];
 
-export interface Props {
-  name: string;
-}
+export interface Props {}
 
 const MultiSelectScreen: React.FC<Props> = _props => {
   const [selected, setSelected] = useState([]);
   const [selected1, setSelected1] = useState([]);
   const [selected2, setSelected2] = useState([]);
-
-  const _header = () => {
-    return (
-      <View style={styles.header}>
-        <View style={styles.pan} />
-      </View>
-    );
-  };
 
   return (
     <View style={styles.container}>
@@ -48,7 +38,7 @@ const MultiSelectScreen: React.FC<Props> = _props => {
       />
 
       <MultiSelect
-        style={styles.dropdown2}
+        style={styles.dropdown}
         data={data}
         labelField="label"
         valueField="value"
@@ -69,11 +59,11 @@ const MultiSelectScreen: React.FC<Props> = _props => {
       />
 
       <MultiSelect
-        style={styles.dropdown}
+        style={styles.dropdown2}
         search
         searchPlaceholder="Search"
-        selectedStyle={{ backgroundColor: 'white', borderColor: '#DDDDDD' }}
-        selectedTextStyle={{ color: 'gray' }}
+        selectedStyle={styles.selectedStyle}
+        selectedTextStyle={styles.selectedTextStyle}
         iconColor={COLORS.SECONDARY}
         data={data}
         labelField="label"
@@ -105,16 +95,32 @@ const styles = StyleSheet.create({
     padding: scale(20),
   },
   dropdown: {
-    marginTop: scale(20),
-    backgroundColor: 'white',
-    borderRadius: scale(12),
-    padding: scale(12),
-  },
-  dropdown2: {
     backgroundColor: 'transparent',
     borderBottomColor: 'gray',
     borderBottomWidth: scale(0.5),
     marginTop: scale(20),
+  },
+  dropdown2: {
+    marginTop: scale(20),
+    backgroundColor: 'white',
+    borderRadius: scale(12),
+    padding: scale(12),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 2,
+  },
+  selectedStyle: {
+    backgroundColor: 'white',
+    borderColor: '#DDDDDD',
+  },
+  selectedTextStyle: {
+    color: 'gray',
   },
   icon: {
     marginRight: scale(5),

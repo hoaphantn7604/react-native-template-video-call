@@ -7,14 +7,16 @@ import React from 'react';
 import MainScreen from 'screens/bottombar';
 import LoginScreen from 'screens/login';
 
-import DropdownScreen from 'screens/theme/components/dropdown';
-import CheckboxTreeScreen from 'screens/theme/components/checkboxTree';
-import TimerScreen from 'screens/theme/components/timer';
-import CountdownScreen from 'screens/theme/components/countdown';
-import SwipeViewScreen from 'screens/theme/components/swipeView';
-import MultiSelectScreen from 'screens/theme/components/multiselect';
-import TextInputScreen from 'screens/theme/components/textInput';
-import ThemeScreen from 'screens/theme';
+import DropdownScreen from 'screens/theme/dropdown';
+import CheckboxTreeScreen from 'screens/theme/checkboxTree';
+import TimerScreen from 'screens/theme/timer';
+import CountdownScreen from 'screens/theme/countdown';
+import SwipeViewScreen from 'screens/theme/swipeView';
+import MultiSelectScreen from 'screens/theme/multiselect';
+import TextInputScreen from 'screens/theme/textInput';
+import AvatarScreen from 'screens/theme/avatar';
+import CheckboxScreen from 'screens/theme/checkbox';
+import ThemeScreen from 'screens/theme/';
 
 export const navigationRef: React.RefObject<NavigationContainerRef<any>> =
   React.createRef();
@@ -42,6 +44,8 @@ function AppNavigator() {
         <Stack.Screen name="Countdown" component={CountdownScreen} />
         <Stack.Screen name="SwipeView" component={SwipeViewScreen} />
         <Stack.Screen name="TextInput" component={TextInputScreen} />
+        <Stack.Screen name="Avatar" component={AvatarScreen} />
+        <Stack.Screen name="Checkbox" component={CheckboxScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

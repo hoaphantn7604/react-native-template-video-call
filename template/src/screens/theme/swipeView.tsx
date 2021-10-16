@@ -5,9 +5,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import SwipeView from 'react-native-vertical-swipe-view';
 import { scale } from 'react-native-utils-scale';
 
-export interface Props {
-  name?: string;
-}
+export interface Props {}
 
 const CurtainScreen: React.FC<Props> = _props => {
   const _renderHeaderTop = () => {
@@ -73,7 +71,7 @@ const styles = StyleSheet.create({
   },
   curtainContainer: {
     flex: 1,
-    backgroundColor: COLORS.SECONDARY,
+    backgroundColor: '#DDDDDD',
   },
   row: {
     flex: 1,
@@ -89,7 +87,7 @@ const styles = StyleSheet.create({
   },
   headerBottom: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: 'gray',
     borderTopLeftRadius: scale(22),
     borderTopRightRadius: scale(22),
     justifyContent: 'center',

@@ -37,11 +37,11 @@ const LoginScrenn: React.FC<Props> = props => {
         Login
       </Text>
       <TextInput
-        style={{ marginTop: scale(20) }}
-        containerStyle={styles.textinput}
+        style={styles.textinput}
         inputStyle={styles.inputStyle}
         labelStyle={styles.labelStyle}
         textErrorStyle={styles.textErrorStyle}
+        placeholderStyle={styles.placeholder}
         value={formik.values.fullName}
         onChangeText={formik.handleChange('fullName')}
         label="Nick name"

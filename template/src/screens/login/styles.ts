@@ -14,11 +14,12 @@ export const styles = StyleSheet.create({
   },
   textinput: {
     borderBottomWidth: scale(0.5),
-    height: scale(50),
+    height: scale(60),
     borderBottomColor: 'gray',
   },
   inputStyle: { fontSize: fontScale(16) },
-  labelStyle: { fontSize: fontScale(18) },
+  labelStyle: { fontSize: fontScale(14) },
+  placeholder: { fontSize: fontScale(18) },
   textErrorStyle: { fontSize: fontScale(16) },
   button: {
     marginTop: scale(32),

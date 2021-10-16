@@ -1,7 +1,7 @@
 {
   "name": "react-native-template-video-call",
   "title": "React Native Video Call",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "React Native Video Call",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

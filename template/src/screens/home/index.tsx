@@ -90,10 +90,9 @@ const HomeScreen: React.FC<Props> = props => {
             {receverName}
           </Text>
           <TextInput
-            style={{ marginVertical: scale(20) }}
-            containerStyle={styles.textinput}
+            style={styles.textinput}
             inputStyle={{ fontSize: fontScale(16) }}
-            labelStyle={{ fontSize: fontScale(18) }}
+            labelStyle={{ fontSize: fontScale(16) }}
             textErrorStyle={{ fontSize: fontScale(16) }}
             autoCapitalize={'none'}
             label="Session Id"
