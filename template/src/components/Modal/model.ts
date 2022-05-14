@@ -9,13 +9,7 @@ export interface Props extends ModalProps {
   backgroundColor?: string;
   transparent?: boolean;
   maxHeight?: number;
-  supportedOrientations?: Array<
-    | 'portrait'
-    | 'portrait-upside-down'
-    | 'landscape'
-    | 'landscape-left'
-    | 'landscape-right'
-  >;
+  supportedOrientations?: Array<'portrait' | 'portrait-upside-down' | 'landscape' | 'landscape-left' | 'landscape-right'>;
   onRequestClose?: () => void;
   renderHeader?: () => JSX.Element;
 }

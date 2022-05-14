@@ -4,7 +4,6 @@ import { useFormik } from 'formik';
 import React from 'react';
 import { View } from 'react-native';
 import { TextInput } from 'react-native-element-textinput';
-import { scale } from 'react-native-utils-scale';
 import { styles } from './styles';
 
 interface Props {}

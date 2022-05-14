@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, View, TouchableWithoutFeedback } from 'react-native';
 import { height as h } from 'react-native-utils-scale';
 import VerticalSwipeView from 'react-native-vertical-swipe-view';
-import { CModal } from './type';
+import { CModal } from './model';
 
 const defaultProps = {
   visible: false,
@@ -18,12 +18,10 @@ const ModalComponent: CModal = props => {
     visible,
     maxHeight = h / 2,
     onRequestClose,
-    transparent,
     style,
     backgroundColor,
     headerStyle,
     renderHeader,
-    supportedOrientations,
   } = props;
 
   return (
@@ -44,16 +42,10 @@ const ModalComponent: CModal = props => {
           position="bottom"
           backgroundColor={backgroundColor}
           maxHeight={maxHeight}
-          autoShow={visible}
+          visible={visible}
           headerStyle={headerStyle}
           renderHeader={renderHeader}
-          onShow={status => {
-            if (!status) {
-              if (onRequestClose) {
-                onRequestClose();
-              }
-            }
-          }}>
+          onRequestClose={onRequestClose}>
           {props?.children}
         </VerticalSwipeView>
       </View>

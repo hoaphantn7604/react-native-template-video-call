@@ -1,12 +1,10 @@
 import { Button, FlatList, Header, Modal, Text } from 'components';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Alert, SafeAreaView, View } from 'react-native';
 import { Image } from 'react-native-element-image';
 import { TextInput } from 'react-native-element-textinput';
 import { fontScale, scale } from 'react-native-utils-scale';
-import { useAppState } from 'react-native-utils-toolkit';
 import Feather from 'react-native-vector-icons/Feather';
-import WebrtcSimple from 'react-native-webrtc-simple';
 import { globalCall } from 'react-native-webrtc-simple/UIKit';
 import { DATA } from './constant';
 import { styles } from './styles';

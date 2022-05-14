@@ -1,9 +1,7 @@
 import { Button, Header } from 'components';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, View } from 'react-native';
-import { TextInput } from 'react-native-element-textinput';
-import { useAppState } from 'react-native-utils-toolkit';
-import WebrtcSimple from 'react-native-webrtc-simple';
+import { HashtagInput } from 'react-native-element-textinput';
 import { globalGroupCall } from 'react-native-webrtc-simple/UIKit';
 import { styles } from './styles';
 
@@ -35,12 +33,12 @@ const GroupScreen: React.FC<Props> = props => {
 
       <View style={styles.boxMyStream}>
         <View style={styles.wrap}>
-          <TextInput
+          <HashtagInput
             style={styles.input}
             placeholder="Session Id..."
             placeholderTextColor="gray"
-            hashtagValue={sessionId}
-            onChangeHashtag={value => {
+            data={sessionId}
+            onChangeValue={value => {
               setSessionId(value);
             }}
             focusColor="red"

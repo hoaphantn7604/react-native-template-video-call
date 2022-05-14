@@ -1,13 +1,19 @@
-import { useNavigation, useRoute } from '@react-navigation/core';
+import { useRoute } from '@react-navigation/core';
 import { COLORS } from 'config';
 import React, { useEffect, useState } from 'react';
-import { Animated, StatusBar, TouchableOpacity, View } from 'react-native';
+import {
+  Alert,
+  Animated,
+  StatusBar,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { CurvedBottomBar } from 'react-native-curved-bottom-bar';
 import { scale } from 'react-native-utils-scale';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import WebrtcSimple from 'react-native-webrtc-simple';
 import GroupScreen from 'screens/group';
 import HomeScreen from 'screens/home';
-import WebrtcSimple from 'react-native-webrtc-simple';
 import { styles } from './styles';
 
 export interface Props {}
@@ -18,7 +24,6 @@ const defaultProps = {
 
 StatusBar.setBarStyle('dark-content');
 const MainScreen: React.FC<Props> = _props => {
-  const { navigate } = useNavigation();
   const fullName = (useRoute().params as any)?.fullName;
   const [sessionId, setSessionId] = useState<string>('');
 
@@ -81,12 +86,12 @@ const MainScreen: React.FC<Props> = _props => {
                 flex: 1,
                 justifyContent: 'center',
               }}
-              onPress={() => navigate('Theme')}>
+              onPress={() => Alert.alert('Click!')}>
               <FontAwesome name={'th-large'} color="gray" size={scale(25)} />
             </TouchableOpacity>
           </Animated.View>
         )}
-        tabBar={({ routeName, selectTab, navigate }) => {
+        tabBar={({ routeName, selectedTab, navigate }) => {
           return (
             <TouchableOpacity
               onPress={() => navigate(routeName)}
@@ -95,7 +100,7 @@ const MainScreen: React.FC<Props> = _props => {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              {_renderIcon(routeName, selectTab)}
+              {_renderIcon(routeName, selectedTab)}
             </TouchableOpacity>
           );
         }}>
