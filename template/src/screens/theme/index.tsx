@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Avatar, Image } from 'react-native-element-image';
+import { Avatar } from 'react-native-element-image';
 import { scale } from 'react-native-utils-scale';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { defaulft_avt, defaulft_img } from './constant';
