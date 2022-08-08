@@ -1,18 +1,14 @@
 import React, { useEffect, useImperativeHandle, useState } from 'react';
 import {
-  FlatList,
-  Image,
-  Modal,
-  StatusBar,
-  Text,
+  FlatList, Image,
+  Modal, StatusBar, Text,
   TouchableOpacity,
   View,
-  Dimensions,
+  Dimensions
 } from 'react-native';
 import { RTCView } from 'react-native-webrtc';
-import WebrtcSimple from 'react-native-webrtc-simple';
-import { CallEvents } from 'react-native-webrtc-simple/WebRtcSimple/contains';
-import { Timer } from './../index';
+import {WebRTCSimple, CallEvents} from 'react-native-webrtc-simple';
+import { Timer } from '../index';
 import { styles } from './styles';
 
 let interval: any = null;
@@ -20,11 +16,13 @@ const ringtime = 20;
 let status: 'start' | 'ring' | 'incall' | 'none' = 'none';
 const { width, height } = Dimensions.get('window');
 
+const RTCViewNew: any = RTCView;
+
 export const globalGroupCallRef = React.createRef<any>();
 export const globalGroupCall = {
   call: (sessionId: string[], userData: object) => {
     globalGroupCallRef?.current?.call(sessionId, userData);
-  },
+  }
 };
 
 export interface Props {
@@ -32,12 +30,10 @@ export interface Props {
 }
 
 StatusBar.setBarStyle('dark-content');
-const GlobalCallUI = React.forwardRef((props, ref) => {
+const GlobalCallUI = React.forwardRef((_props, ref) => {
   const [visible, setVisible] = useState<boolean>(false);
-  const [callStatus, setCallStatus] = useState<
-    'start' | 'ring' | 'incall' | 'none'
-  >('none');
-  const stream = WebrtcSimple.getLocalStream();
+  const [callStatus, setCallStatus] = useState<'start' | 'ring' | 'incall' | 'none'>('none');
+  const stream = WebRTCSimple.getLocalStream();
   const [remotes, setRemotes] = useState<any[]>([]);
   const [groupSessionId, setGroupSessionId] = useState<string[]>([]);
   const [audioEnable, setAudioEnable] = useState<boolean>(true);
@@ -50,20 +46,18 @@ const GlobalCallUI = React.forwardRef((props, ref) => {
   });
 
   useEffect(() => {
-    WebrtcSimple.listenings.getRemoteStream((remoteStream, sessionId) => {
+    WebRTCSimple.listenings.getRemoteStream((remoteStream, sessionId) => {
       if (status === 'incall' || status === 'start' || status === 'ring') {
-        const checkSessionId = remotes.filter(
-          (e: any) => e.sessionId === sessionId,
-        );
+        const checkSessionId = remotes.filter((e: any) => e.sessionId === sessionId);
         if (checkSessionId.length === 0) {
           setRemotes((e: any) => [...e, { remoteStream, sessionId }]);
         }
       }
     });
 
-    WebrtcSimple.listenings.callEvents((type, userData: any) => {
+    WebRTCSimple.listenings.callEvents((type, userData: any) => {
       if (type === CallEvents.receivedGroup) {
-        WebrtcSimple.events.vibration.start(20);
+        WebRTCSimple.events.vibration.start(20);
         setVisible(true);
         video(true);
         audio(true);
@@ -89,9 +83,7 @@ const GlobalCallUI = React.forwardRef((props, ref) => {
 
       if (type === CallEvents.leaveGroup) {
         if (userData?.sessionId) {
-          const listRemote = remotes.filter(
-            (e: any) => e.sessionId !== userData?.sessionId,
-          );
+          const listRemote = remotes.filter((e: any) => e.sessionId !== userData?.sessionId);
           setRemotes(listRemote);
         } else {
           setRemotes([]);
@@ -102,7 +94,7 @@ const GlobalCallUI = React.forwardRef((props, ref) => {
         clearInterval(interval);
         if (userData?.sessionId) {
           if (status === 'incall' || status === 'start') {
-            WebrtcSimple.events.addStream(userData?.sessionId);
+            WebRTCSimple.events.addStream(userData?.sessionId);
           }
         }
       }
@@ -117,6 +109,7 @@ const GlobalCallUI = React.forwardRef((props, ref) => {
 
   const call = (sessionId: string[], userData: any) => {
     if (sessionId.length > 0) {
+
       setVisible(true);
       video(true);
       audio(true);
@@ -135,71 +128,60 @@ const GlobalCallUI = React.forwardRef((props, ref) => {
 
       setName(userData?.name);
       setAvatar(userData?.avatar);
-      WebrtcSimple.events.groupCall(sessionId, userData);
+      WebRTCSimple.events.groupCall(sessionId, userData);
     }
   };
 
   const joinGroup = () => {
-    WebrtcSimple.events.vibration.cancel();
+    WebRTCSimple.events.vibration.cancel();
     status = 'incall';
     setCallStatus('incall');
-    WebrtcSimple.events.joinGroup(groupSessionId);
+    WebRTCSimple.events.joinGroup(groupSessionId);
   };
 
   const leaveGroup = () => {
-    WebrtcSimple.events.vibration.cancel();
+    WebRTCSimple.events.vibration.cancel();
     status = 'none';
     setCallStatus('none');
-    WebrtcSimple.events.leaveGroup();
+    WebRTCSimple.events.leaveGroup();
   };
 
   const video = (enable: boolean) => {
-    WebrtcSimple.events.videoEnable(enable);
+    WebRTCSimple.events.videoEnable(enable);
   };
 
   const audio = (enable: boolean) => {
-    WebrtcSimple.events.audioEnable(enable);
+    WebRTCSimple.events.audioEnable(enable);
   };
 
   const switchCamera = () => {
-    WebrtcSimple.events.switchCamera();
+    WebRTCSimple.events.switchCamera();
   };
 
   const _renderStream = ({ item, index }: any) => {
     return (
-      <RTCView
+      <RTCViewNew
         key={index.toString()}
         mirror
         streamURL={item.remoteStream.toURL()}
         zOrder={999}
-        style={[
-          styles.remoteStream,
-          remotes.length === 1 && { width: width, height: height },
-        ]}
+        style={[styles.remoteStream, remotes.length === 1 && { width: width, height: height }]}
         objectFit="cover"
       />
     );
   };
 
   const renderIcon = (icon: any, color: string, onPress: () => void) => {
-    return (
-      <View>
-        <TouchableOpacity
-          style={[styles.btnCall, { backgroundColor: color }]}
-          onPress={() => {
-            onPress();
-          }}>
-          <Image
-            style={[
-              styles.icon,
-              { tintColor: color === 'white' ? 'black' : 'white' },
-            ]}
-            source={icon}
-          />
-        </TouchableOpacity>
-      </View>
-    );
-  };
+    return (<View>
+      <TouchableOpacity
+        style={[styles.btnCall, { backgroundColor: color }]}
+        onPress={() => {
+          onPress();
+        }}>
+        <Image style={[styles.icon, { tintColor: color === 'white' ? 'black' : 'white' }]} source={icon} />
+      </TouchableOpacity>
+    </View>)
+  }
 
   if (!visible) {
     return null;
@@ -213,92 +195,64 @@ const GlobalCallUI = React.forwardRef((props, ref) => {
         setVisible(false);
       }}>
       <View style={styles.modalCall}>
-        {(callStatus === 'start' || callStatus === 'ring') && (
-          <Text style={styles.name}>{name}</Text>
-        )}
-        {(callStatus === 'start' || callStatus === 'ring') && (
-          <Image style={styles.avatar} source={{ uri: avatar }} />
-        )}
-        {(callStatus === 'start' || callStatus === 'ring') && (
-          <Timer style={styles.timer} textStyle={styles.textTimer} start />
-        )}
+        {(callStatus === 'start' || callStatus === 'ring') && <Text style={styles.name}>{name}</Text>}
+        {(callStatus === 'start' || callStatus === 'ring') && <Image style={styles.avatar} source={{ uri: avatar }} />}
+        {(callStatus === 'start' || callStatus === 'ring') && <Timer style={styles.timer} textStyle={styles.textTimer} start />}
 
-        {callStatus === 'incall' && (
-          <View style={styles.boxMyStream}>
-            <RTCView
-              mirror
-              streamURL={stream.toURL()}
-              zOrder={999}
-              style={styles.myStream}
-              objectFit="cover"
-            />
-            <Timer style={styles.timer2} textStyle={styles.textTimer2} start />
-            <TouchableOpacity onPress={() => switchCamera()}>
-              <Image
-                style={styles.iconCamera}
-                source={require('./icon/camera.png')}
-              />
-            </TouchableOpacity>
-          </View>
-        )}
-        {remotes.length > 0 && (
-          <View style={styles.wrapListStream}>
-            <FlatList
-              extraData={remotes}
-              data={remotes}
-              numColumns={2}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={_renderStream}
-            />
-          </View>
-        )}
-        {callStatus === 'start' && (
+        {callStatus === 'incall' && <View style={styles.boxMyStream}>
+          <RTCViewNew mirror streamURL={stream.toURL()} zOrder={999} style={styles.myStream} objectFit="cover" />
+          <Timer
+            style={styles.timer2}
+            textStyle={styles.textTimer2} start
+          />
+          <TouchableOpacity onPress={() => switchCamera()}>
+            <Image style={styles.iconCamera} source={require('./icon/camera.png')} />
+          </TouchableOpacity>
+        </View>}
+        {remotes.length > 0 && <View style={styles.wrapListStream}>
+          <FlatList
+            extraData={remotes}
+            data={remotes}
+            numColumns={2}
+            keyExtractor={(_item, index) => index.toString()}
+            renderItem={_renderStream}
+          />
+        </View>}
+        {callStatus === 'start' && <View style={styles.manageCall}>
+          {renderIcon(require('./icon/endcall.png'), 'red', () => {
+            setVisible(false);
+            leaveGroup();
+          })}
+        </View>}
+
+        {callStatus === 'ring' && <View style={styles.manageCall}>
+          {renderIcon(require('./icon/call.png'), 'green', () => {
+            joinGroup();
+          })}
+          {renderIcon(require('./icon/endcall.png'), 'red', () => {
+            setVisible(false);
+            leaveGroup();
+          })}
+        </View>}
+
+        {callStatus === 'incall' &&
           <View style={styles.manageCall}>
-            {renderIcon(require('./icon/endcall.png'), 'red', () => {
-              setVisible(false);
-              leaveGroup();
+            {renderIcon(require('./icon/micro.png'), audioEnable ? 'white' : 'red', () => {
+              audio(!audioEnable);
+              setAudioEnable(!audioEnable);
             })}
-          </View>
-        )}
 
-        {callStatus === 'ring' && (
-          <View style={styles.manageCall}>
-            {renderIcon(require('./icon/call.png'), 'green', () => {
-              joinGroup();
+            {renderIcon(require('./icon/video.png'), videoEnabled ? 'white' : 'red', () => {
+              video(!videoEnabled);
+              setVideoEnable(!videoEnabled);
             })}
-            {renderIcon(require('./icon/endcall.png'), 'red', () => {
-              setVisible(false);
-              leaveGroup();
-            })}
-          </View>
-        )}
-
-        {callStatus === 'incall' && (
-          <View style={styles.manageCall}>
-            {renderIcon(
-              require('./icon/micro.png'),
-              audioEnable ? 'white' : 'red',
-              () => {
-                audio(!audioEnable);
-                setAudioEnable(!audioEnable);
-              },
-            )}
-
-            {renderIcon(
-              require('./icon/video.png'),
-              videoEnabled ? 'white' : 'red',
-              () => {
-                video(!videoEnabled);
-                setVideoEnable(!videoEnabled);
-              },
-            )}
 
             {renderIcon(require('./icon/endcall.png'), 'red', () => {
               setVisible(false);
               leaveGroup();
             })}
-          </View>
-        )}
+          </View>}
+
       </View>
     </Modal>
   );

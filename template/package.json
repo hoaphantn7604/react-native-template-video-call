@@ -1,5 +1,5 @@
 {
-  "name": "RNVideoCall",
+  "name": "MyAppCall",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -11,13 +11,14 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "*",
+    "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.1",
     "@react-navigation/stack": "^6.2.1",
     "formik": "*",
     "i18next": "*",
     "lodash": "*",
-    "react": "17.0.2",
+    "react": "18.2.0",
     "react-i18next": "*",
     "react-native": "0.67.2",
     "react-native-checkbox-tree": "*",
@@ -27,7 +28,6 @@
     "react-native-element-textinput": "*",
     "react-native-element-timer": "*",
     "react-native-indicators": "*",
-    "react-native-pager-view": "*",
     "react-native-safe-area-context": "^4.2.4",
     "react-native-screens": "^3.13.1",
     "react-native-svg": "*",

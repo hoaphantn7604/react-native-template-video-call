@@ -11,7 +11,7 @@ import {
 import { CurvedBottomBar } from 'react-native-curved-bottom-bar';
 import { scale } from 'react-native-utils-scale';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import WebrtcSimple from 'react-native-webrtc-simple';
+import {WebRTCSimple} from 'react-native-webrtc-simple';
 import GroupScreen from 'screens/group';
 import HomeScreen from 'screens/home';
 import { styles } from './styles';
@@ -19,7 +19,7 @@ import { styles } from './styles';
 export interface Props {}
 
 const defaultProps = {
-  appName: 'Wellcome hooks',
+  appName: 'WellCome',
 };
 
 StatusBar.setBarStyle('dark-content');
@@ -37,10 +37,10 @@ const MainScreen: React.FC<Props> = _props => {
       key: Math.random().toString(36).substr(2, 4),
     };
 
-    WebrtcSimple.start(configuration, { frameRate: 120 })
+    WebRTCSimple.start(configuration, { frameRate: 120 })
       .then(status => {
         if (status) {
-          WebrtcSimple.getSessionId((sessionId: string) => {
+          WebRTCSimple.getSessionId((sessionId: string) => {
             setSessionId(sessionId);
           });
         }
@@ -52,10 +52,10 @@ const MainScreen: React.FC<Props> = _props => {
     let icon = '';
 
     switch (routeName) {
-      case 'title1':
+      case 'Call':
         icon = 'user-circle-o';
         break;
-      case 'title2':
+      case 'Group':
         icon = 'group';
         break;
     }
@@ -78,7 +78,6 @@ const MainScreen: React.FC<Props> = _props => {
         circleWidth={scale(55)}
         bgColor="white"
         initialRouteName="title1"
-        swipeEnabled
         renderCircle={() => (
           <Animated.View style={styles.btnCircle}>
             <TouchableOpacity
@@ -105,15 +104,15 @@ const MainScreen: React.FC<Props> = _props => {
           );
         }}>
         <CurvedBottomBar.Screen
-          name="title1"
-          position="left"
+          name="Call"
+          position="LEFT"
           component={({ navigate }) => (
             <HomeScreen fullName={fullName} sessionId={sessionId} />
           )}
         />
         <CurvedBottomBar.Screen
-          name="title2"
-          position="right"
+          name="Group"
+          position="RIGHT"
           component={({ navigate }) => (
             <GroupScreen fullName={fullName} sessionId={sessionId} />
           )}

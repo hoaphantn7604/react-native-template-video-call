@@ -2,7 +2,7 @@ import { Button, Header } from 'components';
 import React, { useState } from 'react';
 import { SafeAreaView, View } from 'react-native';
 import { HashtagInput } from 'react-native-element-textinput';
-import { globalGroupCall } from 'react-native-webrtc-simple/UIKit';
+import { globalGroupCall } from 'components/UIKit';
 import { styles } from './styles';
 
 interface Props {

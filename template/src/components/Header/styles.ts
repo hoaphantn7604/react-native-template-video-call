@@ -1,9 +1,8 @@
 import { StyleSheet } from 'react-native';
-import { hasNotch, scale } from 'react-native-utils-toolkit';
+import { scale } from 'react-native-utils-toolkit';
 
 export const styles = StyleSheet.create({
   container: {
-    marginTop: scale(hasNotch ? 10 : 20),
     height: scale(55),
     flexDirection: 'row',
     width: '100%',

@@ -11,7 +11,7 @@ import {
   GlobalCallUI,
   globalGroupCallRef,
   GlobalGroupCallUI,
-} from 'react-native-webrtc-simple/UIKit';
+} from 'components/UIKit';
 
 LogBox.ignoreAllLogs(true);
 StatusBar.setBarStyle('dark-content');
